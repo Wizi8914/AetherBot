@@ -35,7 +35,7 @@ module.exports = class bugcommand extends Command {
 
 
         message.say(embed)
-        message.say(':white_check_mark: **Mercie pour votre colaboration un un developeur réglera ce bug dans les prochain jours**')
+        message.say(':white_check_mark: **Merci pour votre collaboration, un développeur réglera ce bug dans les prochains jours.**')
 
 
         const report = message.guild.members.cache.get('505762041789808641')
