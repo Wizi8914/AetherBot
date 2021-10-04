@@ -1,0 +1,170 @@
+const { VoiceConnection } = require('discord.js');
+const { Command, CommandoMessage } = require("discord.js-commando");
+const { UserNotInVoiceChannel, EmptyPlayMessage } = require('../../strings.json');
+
+const ytdl = require('ytdl-core');
+const ytsr = require('youtube-search');
+const ytpl = require('ytpl');
+const spdl = require('spdl-core')
+
+var SpotifyWebApi = require('spotify-web-api-node');
+
+var spotifyApi = new SpotifyWebApi ({
+    accessToken: process.env.SPOTIFY_TOKEN
+});
+
+require('dotenv').config()
+
+module.exports = class PlayCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'play',
+            aliases: ['p'],
+            group: 'music',
+            memberName: 'play',
+            description: 'lit une video youtube',
+            args: [
+                {
+                    key: 'term',
+                    prompt: 'Quel musique veut tu lire ?',
+                    type: 'string'
+                }
+            ]
+        });
+    }
+
+    /**
+     * 
+     * @param {CommandoMessage} message 
+     * @param {String} query
+     */
+    async run(message, { term }) {
+        const voicechannel = message.member.voice.channel;
+        if (!voicechannel) {
+            return message.say(UserNotInVoiceChannel)
+        }
+
+        const server = message.client.server;
+
+        if (!voicechannel) {
+            return message.say(UserNotInVoiceChannel);
+        }
+
+        if(!term) {
+            message.say(EmptyPlayMessage)
+        }
+
+        await voicechannel.join().then((connection) => {
+            if(term.startsWith('https://open.spotify.com/')) {
+                //spotify
+                var result = term.split(/[/?]/)[4];
+
+                spotifyApi.getPlaylistTracks(result).then(
+                    function(data) {
+
+                        server.queue = [];
+                        server.currentVideo = { title: data.body.items[0].track.name, url : data.body.items[0].track.external_urls.spotify}
+
+                        for (let i = 1; i < data.body.items.length; i++) {
+                            server.queue.push({ title: data.body.items[i].track.name, url : data.body.items[i].track.external_urls.spotify});
+                            
+                        }
+                        message.say(":white_check_mark: `" + data.body.items.length + "` musiques on été ajouter dans la file d'attente");
+
+                    }
+
+                );
+                this.runVideo(message, connection)
+
+                server.playlist = 'spotify'
+
+            } else {
+                //playlist yt
+                if (ytpl.validateID(term)) {
+
+                    server.queue = [];
+                    server.currentVideo = { url: "", title: "Rien pour le moment" };
+
+                    ytpl(term).then((result) => {
+                        result.items.forEach((video) => {
+                            server.queue.push({ title: video.title, url : video.shortUrl});
+                        });
+                        
+                        server.currentVideo = server.queue[0]
+                        this.runVideo(message, connection).then(() => {
+                            message.say(":white_check_mark: `" + result.items.length + "` musiques on été ajouter dans la file d'attente");
+                        });
+                    })
+                    server.playlist = 'youtube'
+
+                } else {
+                    // vidéo
+                    ytsr(term, { key: process.env.YOUTUBE_KEY, maxResults: 1, type: 'video' }).then((results) => {
+    
+                        if (results.results[0]) {
+                            const foundVideo = { url: results.results[0].link, title: results.results[0].title };
+    
+                            if (server.currentVideo.url != "") {
+                                server.queue.push(foundVideo);
+                                return message.say(":white_check_mark: " + "`" + foundVideo.title + "`" + " - Ajouter a la file d'attente !");
+                            }
+    
+                            server.currentVideo = foundVideo;
+                            this.runVideo(message, connection);
+                        }
+                        server.playlist = 'spotify'
+                    });
+                }
+            }
+
+        });
+
+    }
+
+    /**
+     * 
+     * @param {CommandoMessage} message 
+     * @param {VoiceConnection} connection 
+     * @param {*} video 
+     */
+    async runVideo(message, connection) {
+        const server = message.client.server;
+
+
+        if (server.playlist === 'youtube') {
+            const dispatcher = connection.play(ytdl(server.currentVideo.url, { filter: 'audioonly' }));
+
+            server.queue.shift();
+            server.dispatcher = dispatcher;
+            server.connection = connection;
+
+
+            dispatcher.on('finish', () => {
+                if (server.queue[0]) {
+                    server.currentVideo = server.queue[0];
+                    return this.runVideo(message, connection, server.currentVideo.url);
+                }
+            });
+
+
+        } else if (server.playlist === 'spotify') {
+            const dispatcher = connection.play(await spdl(server.currentVideo.url))
+
+            server.queue.shift();
+            server.dispatcher = dispatcher;
+            server.connection = connection;
+
+
+            dispatcher.on('finish', () => {
+                if (server.queue[0]) {
+                    server.currentVideo = server.queue[0];
+                    return this.runVideo(message, connection, server.currentVideo.url);
+                }
+            });
+        }
+
+        setTimeout(() => {
+            return message.say(":notes: Entrain de jouer - " + "`" + server.currentVideo.title + "`");
+        }, 700);
+    }
+}

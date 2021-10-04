@@ -1,0 +1,131 @@
+const { VoiceConnection } = require('discord.js');
+const { Command, CommandoMessage } = require("discord.js-commando");
+const { UserNotInVoiceChannel, EmptyPlayMessage } = require('../../strings.json');
+
+const ytdl = require('ytdl-core');
+const ytsr = require('youtube-search');
+const ytpl = require('ytpl');
+
+require('dotenv').config()
+
+
+module.exports = class PlayCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'play',
+            aliases: ['p'],
+            group: 'music',
+            memberName: 'play',
+            description: 'lit une video youtube',
+            args: [
+                {
+                    key: 'term',
+                    prompt: 'Quel musique veut tu lire ?',
+                    type: 'string'
+                }
+            ]
+        });
+    }
+
+    /**
+     * 
+     * @param {CommandoMessage} message 
+     * @param {String} query
+     */
+    async run(message, { term }) {
+        const voicechannel = message.member.voice.channel;
+        if (!voicechannel) {
+            return message.say(UserNotInVoiceChannel)
+        }
+
+        const server = message.client.server;
+
+        if (!voicechannel) {
+            return message.say(UserNotInVoiceChannel);
+        }
+
+        if(!term) {
+            message.say(EmptyPlayMessage)
+        }
+
+        await voicechannel.join().then(async(connection) => {
+            if(term.startsWith('https://open.spotify.com/')) {
+                //spotify
+
+                let REGEX = lavasfy.spotifyPattern;
+
+                if(term.match(REGEX)) {
+                    let node = lavasfy.nodes.get("main")
+                    let res = await node.load(term)
+                }
+
+                console.log(res)
+                
+            } else {
+                //playlist yt
+                if (ytpl.validateID(term)) {
+
+                    server.queue = [];
+                    server.currentVideo = { url: "", title: "Rien pour le moment" };
+
+                    ytpl(term).then((result) => {
+                        result.items.forEach((video) => {
+                            server.queue.push({ title: video.title, url : video.shortUrl});
+                        });
+                        
+                        server.currentVideo = server.queue[0]
+                        this.runVideo(message, connection).then(() => {
+                            message.say(":white_check_mark: `" + result.items.length + "` musiques on été ajouter dans la file d'attente");
+                        });
+                    })
+                    server.playlist = 'youtube'
+
+                } else {
+                    // vidéo
+                    ytsr(term, { key: process.env.YOUTUBE_KEY, maxResults: 1, type: 'video' }).then((results) => {
+    
+                        if (results.results[0]) {
+                            const foundVideo = { url: results.results[0].link, title: results.results[0].title };
+    
+                            if (server.currentVideo.url != "") {
+                                server.queue.push(foundVideo);
+                                return message.say(":white_check_mark: " + "`" + foundVideo.title + "`" + " - Ajouter a la file d'attente !");
+                            }
+    
+                            server.currentVideo = foundVideo;
+                            this.runVideo(message, connection);
+                        }
+                        server.playlist = 'spotify'
+                    });
+                }
+            }
+
+        });
+
+    }
+
+    /**
+     * 
+     * @param {CommandoMessage} message 
+     * @param {VoiceConnection} connection 
+     * @param {*} video 
+     */
+    async runVideo(message, connection) {
+        const server = message.client.server;
+
+        const dispatcher = connection.play(ytdl(server.currentVideo.url, { filter: 'audioonly' }));
+
+        server.queue.shift();
+        server.dispatcher = dispatcher;
+        server.connection = connection;
+
+            dispatcher.on('finish', () => {
+                if (server.queue[0]) {
+                    server.currentVideo = server.queue[0];
+                    return this.runVideo(message, connection, server.currentVideo.url);
+                }
+            });
+
+            message.say(":notes: Entrain de jouer - " + "`" + server.currentVideo.title + "`");
+    }
+}

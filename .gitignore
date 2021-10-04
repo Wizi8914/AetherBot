@@ -1,0 +1,6 @@
+.env
+node_modules$
+database.json
+warndb.json
+node_modules
+logs
