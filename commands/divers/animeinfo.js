@@ -10,7 +10,8 @@ module.exports = class AnimeinfoCommand extends Command {
             aliases: ['anime'],
             group: 'divers',
             memberName: 'animeinfo',
-            description: 'donne des information par apport a un anime'
+            description: "La commande animeinfo vous donne plusieur information par appord a un l'anime cité dans la commande",
+            examples: ["animeinfo <titre>, [page]"]
         });
     }
 

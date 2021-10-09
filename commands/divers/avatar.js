@@ -8,7 +8,8 @@ module.exports = class AvatarCommand extends Command {
             name: 'avatar',
             group: 'divers',
             memberName: 'avatar',
-            description: 'pp dun joueur'
+            description: "La commande avatar permet d'afficher la photo de profile de la personne mentionner",
+            examples: ["avatar <mention>"]
         });
     }
 
@@ -21,7 +22,7 @@ module.exports = class AvatarCommand extends Command {
         let member = message.mentions.users.first();
 
         if(!args[1].startsWith('@')) {
-            return message.say(':x: Il faut mentioner une personne et non écrire son pseudonime !')
+            return message.say(':x: Il faut mentionner une personne et non écrire son pseudonime !')
         }
 
         let avatar = member.displayAvatarURL({size: 1024})

@@ -9,7 +9,8 @@ module.exports = class IconCommand extends Command {
             name: 'icon',
             group: 'divers',
             memberName: 'icon',
-            description: 'icon du serveur'
+            description: "La commande icon permet d'afficher l'image de profile du bot",
+            examples:  ["icon"]
         });
     }
 

@@ -7,7 +7,8 @@ module.exports = class infoCommand extends Command {
             aliases: ['i','np'],
             group: 'music',
             memberName: 'info',
-            description: 'afiche la musique jouer'
+            description: "La commande info permet d'aficher la musique en cour de lecture",
+            examples: ["info"]
         });
     }
 

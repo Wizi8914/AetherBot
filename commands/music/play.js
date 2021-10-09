@@ -16,7 +16,8 @@ module.exports = class PlayCommand extends Command {
             aliases: ['p'],
             group: 'music',
             memberName: 'play',
-            description: 'lit une video youtube',
+            description: 'La commande play permet de jouer de la musique dans un salon vocal',
+            examples: [">play <nom/URL>"]
                 
         });
     }

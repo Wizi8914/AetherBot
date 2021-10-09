@@ -6,7 +6,8 @@ module.exports = class PingCommand extends Command {
             name: 'ping',
             group: 'utilitaire',
             memberName: 'ping',
-            description: 'permet de aficher le ping'
+            description: "La commande ping permet d'afficher le ping du bot",
+            examples: ["ping"]
             
         });
     }

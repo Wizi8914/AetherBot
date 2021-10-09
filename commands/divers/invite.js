@@ -8,7 +8,8 @@ module.exports = class InviteCommand extends Command {
             name: 'invite',
             group: 'divers',
             memberName: 'invite',
-            description: 'permet de aficher les invites'
+            description: "La commande invite permet d'affichier un classement du nombre d'invitation des différent membes",
+            examples: ["invite"]
         });
     }
 

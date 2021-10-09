@@ -9,7 +9,8 @@ module.exports = class nickCommand extends Command {
             aliases: ['nick', 'setnickname'],
             group: 'utilitaire',
             memberName: 'setnick',
-            description: 'vous nick',
+            description: 'La commande setnick permet de changer le pseudo de la personne mentionné sur le server sur lequel vous vous trouvez',
+            examples: ['setnick <mention> [pseudo]'],
             guildOnly: true
         });
     }

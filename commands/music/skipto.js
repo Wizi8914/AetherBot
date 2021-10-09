@@ -9,7 +9,8 @@ module.exports = class SkiptoCommand extends Command {
             name: 'skipto',
             group: 'music',
             memberName: 'skipto',
-            description: 'Saute un nombre de titre en cour de lecture',
+            description: 'La commande skipto permet de sauter plusieurs musiques dans la queue',
+            examples: ["skipto [nombre]"],
             args: [
                 {
                     key: 'index',

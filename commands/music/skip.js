@@ -9,7 +9,8 @@ module.exports = class SkipCommand extends Command {
             name: 'skip',
             group: 'music',
             memberName: 'skip',
-            description: 'saute un titre en cour de lecture'
+            description: 'La commande skip permet de sauter une musique dans la queue',
+            examples: ["skip"]
         });
     }
 

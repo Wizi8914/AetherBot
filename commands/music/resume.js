@@ -8,7 +8,8 @@ module.exports = class ResumeCommand extends Command {
             name: 'resume',
             group: 'music',
             memberName: 'resume',
-            description: 'remet la musique qui étais en pause'
+            description: "La commande resume permet de reprendre l'écoute du song mie en pause",
+            examples: ["resume"]
         });
     }
 

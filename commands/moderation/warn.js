@@ -9,7 +9,8 @@ module.exports = class WarnCommand extends Command {
             name: 'warn',
             group: 'moderation',
             memberName: 'warn',
-            description: 'donne un warn'
+            description: 'La commande warn permet de donner un warn a une personne mentionner (Il faut ètre administrateur pour utiliser cette commande)',
+            examples: ["warn <mention>"]
         });
     }
 

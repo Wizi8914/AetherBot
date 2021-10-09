@@ -12,7 +12,8 @@ module.exports = class SounboardCommand extends Command {
             aliases: ['sb'],
             group: 'divers',
             memberName: 'soundboard',
-            description: 'joue des memes',
+            description: "La commande soundboard permet d'utiliser une soundboard dans un salon vocal",
+            examples: ["soundboard <nom>"],
             args: [
                 {
                     key: 'term',
@@ -21,6 +22,7 @@ module.exports = class SounboardCommand extends Command {
                     type: 'string'
                 }
             ]
+
         });
     }
 
@@ -140,7 +142,7 @@ module.exports = class SounboardCommand extends Command {
     
             if (term === 'list') {
                 const embed = new Discord.MessageEmbed()
-                .setTitle("Liste des Soundboard d' Amaterasu")
+                .setTitle(`Liste des Soundboard d'${botname}`)
                 .setColor('GREEN')
                 .setDescription('Utilisation: ' + "`" + ">soundboard <text>" + "` \n Aliases: " + "`" + ">sb <text>" + "`")
                 .setThumbnail('https://i.ibb.co/ZgNT9vT/logo-kinoko.png')

@@ -1,4 +1,5 @@
 const { Command, CommandoMessage } = require('discord.js-commando');
+const { botname } = require('../../config');
 const { UserNotInVoiceChannel, BotNotInVoiceChannel, BotIsNotInSameChannel } = require('../../strings.json');
 
 module.exports = class VoteCommand extends Command {
@@ -8,7 +9,8 @@ module.exports = class VoteCommand extends Command {
             aliases: ['l', 'stop'],
             group: 'music',
             memberName: 'leave',
-            description: 'permet de aficher le vote'
+            description: `La commande stop permet de faire partir ${botname} de votre vocal`,
+            examples: ['leave']
         });
     }
 
@@ -28,6 +30,6 @@ module.exports = class VoteCommand extends Command {
         server.currentVideo = { url: "", title: "Rien pour le moment" };
 
         voiceChannel.leave();
-        message.say(":white_check_mark: Amaterasu a quitter " + "`" + message.member.voice.channel.name + "`" + " !");
+        message.say(`:white_check_mark: ${botname} a quitter ` + "`" + message.member.voice.channel.name + "`" + " !");
     }
 }

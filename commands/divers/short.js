@@ -13,7 +13,8 @@ module.exports = class shortCommand extends Command {
             name: 'short',
             group: 'divers',
             memberName: 'short',
-            description: 'short'
+            description: 'La commande short permet de racourcir un URL',
+            examples: ["short <URL>"]
         });
     }
  
@@ -24,7 +25,7 @@ module.exports = class shortCommand extends Command {
                 return message.say(res.short);
             })
         } else {
-            return message.say(":x: Il s'emblerais qu'il y ai une erreur veuiller reseiller avec un URL valide");
+            return message.say(":x: Il s'emblerais qu'il y ai une erreur veuillez réessayer avec un URL valide");
         }
     }
 }

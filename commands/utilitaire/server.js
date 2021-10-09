@@ -9,7 +9,8 @@ module.exports = class ServerCommand extends Command {
             name: 'server',
             group: 'utilitaire',
             memberName: 'server',
-            description: 'info du serveur'
+            description: "La commande server permet d'avoir plusieur information par apport au server discord sur lequelle vous vous trouvez",
+            examples: ["server"]
         });
     }
 

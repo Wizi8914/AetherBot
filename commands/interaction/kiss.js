@@ -8,7 +8,8 @@ module.exports = class Kisscommand extends Command {
             name: 'kiss',
             group: 'interaction',
             memberName: 'kiss',    
-            description: 'embrace un utilisateur'
+            description: 'La commande kiss permet de embracer un utilisateur mentionner',
+            examples: ["kiss <mention>"]
         });
     }
 

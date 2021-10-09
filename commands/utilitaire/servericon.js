@@ -9,7 +9,8 @@ module.exports = class Servericon extends Command {
             name: 'servericon',
             group: 'utilitaire',
             memberName: 'servericon',
-            description: "donne l'icon du server"
+            description: "La commande servericon permet de donné l'icon du server sur lequelle vous vous trouvez",
+            examples: ["servericon"]
         });
     }
     

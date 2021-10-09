@@ -7,7 +7,8 @@ module.exports = class SayCommand extends Command {
             name: 'say',
             group: 'divers',
             memberName: 'say',
-            description: 'dit ce que tu veut aux bot '
+            description: 'La commande say permet de faire répéter ce que vous voulez aux bot',
+            examples: ["say <text>"]
         });
     }
 

@@ -7,7 +7,8 @@ module.exports = class BanCommand extends Command {
             name: 'ban',
             group: 'moderation',
             memberName: 'ban',
-            description: 'ban un joueur'
+            description: 'La commande ban permet de ban la personne mentionner (Il faut ètre administrateur pour utiliser cette commande)',
+            examples: ["ban <mention>"]
         });
     }
 

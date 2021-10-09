@@ -10,7 +10,8 @@ module.exports = class QueueCommand extends Command {
             aliases: ['list'],
             group: 'music',
             memberName: 'queue',
-            description: "Affiche la file d'attente. Pour afficher différentes pages, tape la commande avec le numéro de page spécifié après (queue 2).",
+            description: "Affiche la file d'attente. Pour afficher différentes pages, il faut ecrir la commande avec le numéro de page spécifié après (queue 2).",
+            examples: ["queue [page]"],
             args: [
                 {
                     key: 'page',

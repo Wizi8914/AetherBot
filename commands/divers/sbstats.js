@@ -11,7 +11,8 @@ module.exports = class SBCommand extends Command {
             aliases: ['skyblockstats'],
             group: 'divers',
             memberName: 'sbstats',
-            description: 'dit ce que tu veut aux bot '
+            description: "La commande skyblockstats permet d'afficher les statistiques du pseudo minecraft mentionner sur le skyblock d'Hypixel",
+            examples: ["sbstats <pseudo>"]
         });
     }
 

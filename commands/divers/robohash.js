@@ -8,7 +8,8 @@ module.exports = class robohashCommand extends Command {
             name: 'robohash',
             group: 'divers',
             memberName: 'robohash',
-            description: "donne la pp roboash de l'arg"
+            description: "La commande robohash permet de donné le robohash de l'argument de la commande",
+            examples: ["robohash <text>"]
         });
     }
 

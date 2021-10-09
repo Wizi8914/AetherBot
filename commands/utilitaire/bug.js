@@ -9,7 +9,8 @@ module.exports = class bugcommand extends Command {
             name: 'bug',
             group: 'divers',
             memberName: 'bug',
-            description: 'report un bug'
+            description: 'La commande bug permet de reporter un bug a un developeur',
+            examples: ["bug <description du bug>"]
         });
     }
 

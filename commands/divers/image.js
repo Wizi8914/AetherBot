@@ -12,7 +12,8 @@ module.exports = class imageCommand extends Command {
             name: 'image',
             group: 'divers',
             memberName: 'image',
-            description: 'cherche une image sur google'
+            description: "La commande image permet de donner une image aléatoire de l'arument de la commande",
+            examples: ["image <image>"]
         })
     }
 

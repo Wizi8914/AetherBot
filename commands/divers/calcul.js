@@ -9,7 +9,8 @@ module.exports = class CalculCommand extends Command {
             name: 'calcul',
             group: 'divers',
             memberName: 'calcul',
-            description: 'permet de aficher le vote'
+            description: 'La commande calcul permet de faire un calcul plus ou moin complexe',
+            examples: ["calcul <calcul>"]
         });
     }
         

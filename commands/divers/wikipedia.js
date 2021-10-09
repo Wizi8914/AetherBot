@@ -10,7 +10,8 @@ module.exports = class WikipediaCommand extends Command {
             aliases: ['wiki'],
             group: 'divers',
             memberName: 'wikipedia',
-            description: 'show wikipedia page'
+            description: 'La commande wikipedia permet de donné la page wikipedia indiqué dans la commande',
+            examples: ['wikipedia <page>']
         });
     }
 

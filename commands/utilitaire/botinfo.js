@@ -11,7 +11,8 @@ module.exports = class BotInfoCommand extends Command {
             name: 'botinfo',
             group: 'utilitaire',
             memberName: 'botinfo',
-            description: 'info du bot',
+            description: "La commande botinfo permet d'afficher plusieur information sur le bot",
+            examples: ["botinfo"]
         })
     }
 

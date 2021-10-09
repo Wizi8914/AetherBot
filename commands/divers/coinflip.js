@@ -9,7 +9,8 @@ module.exports = class CFCommand extends Command {
             aliases: ['cf'],
             group: 'divers',
             memberName: 'coinflip',
-            description: 'fait tourner une piuèce',
+            description: 'La commande coinflip permet de faire un coinflip (pile ou face en francais)',
+            examples: ["coinflip"]
         })
     }
 

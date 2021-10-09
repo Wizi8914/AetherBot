@@ -11,7 +11,8 @@ module.exports = class LyricsCommand extends Command {
             name: 'lyrics',
             group: 'music',
             memberName: 'lyrics',
-            description: 'permet de aficher le vote'
+            description: "La commande lyrics permet d'afficher les paroles de la musique qui est actuellement entrain d'ètre jouer",
+            examples: ["lyrics"]
         });
     }
 

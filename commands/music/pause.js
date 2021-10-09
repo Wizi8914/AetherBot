@@ -9,7 +9,8 @@ module.exports = class PauseCommand extends Command {
             name: 'pause',
             group: 'music',
             memberName: 'pause',
-            description: 'met en pause la musique'
+            description: 'La commande pause permet permet de mettre la musique jouer en pause',
+            examples: ["pause"]
         });
     }
 

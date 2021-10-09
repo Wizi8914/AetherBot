@@ -7,7 +7,8 @@ module.exports = class KickCommand extends Command {
             name: 'kick',
             group: 'moderation',
             memberName: 'kick',
-            description: 'kick un joueur'
+            description: 'La commande kick permet de kick la personne mentionner (Il faut ètre administrateur pour utiliser cette commande)',
+            examples: ["kick <mention>"]
         });
     }
 

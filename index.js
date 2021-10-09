@@ -169,7 +169,10 @@ client.once('disconnect', () => {
 
 client.once('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag} - (${client.user.id})`);
-    client.user.setActivity(`⚙️ ${botname} est actuellement en maintenance`, { type: 'PLAYING' });
+    setTimeout(() => {
+        client.user.setActivity(`⚙️ ${botname} est actuellement en maintenance`, { type: 'PLAYING' });
+    }, 1000);
+    //client.user.setPresence({ status: "idle" });
     client.manager.init(client.user.id)
 }); 
 

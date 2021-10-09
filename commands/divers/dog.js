@@ -9,7 +9,8 @@ module.exports = class dogCommand extends Command {
             name: 'dog',
             group: 'divers',
             memberName: 'dog',
-            description: 'giv dog image'
+            description: 'La commande dog donne une image / Gif / Vidéo aléatoire de chien',
+            examples: ['dog']
         });
     }
  
@@ -19,7 +20,7 @@ module.exports = class dogCommand extends Command {
        
         const embed = new MessageEmbed()
             .setColor('RANDOM')
-            .setTitle('Image / Gif / Vidéo aleatoire de chien')
+            .setTitle('Image / Gif / Vidéo aléatoire de chien')
             .setURL(responce.url)
             .setImage(responce.url)
             .setDescription("Si L'`image` le `gif` ou la `vidéo` ne charge pas clicker sur le **titre**")

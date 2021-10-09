@@ -13,7 +13,8 @@ module.exports = class TranslateCommand extends Command {
             aliases: ['t'],
             group: 'divers',
             memberName: 'translate',
-            description: 'traduit un truc'
+            description: "La commande translate permet de traduire un texte de n'importe quelle langue ver n'importe quelle langue",
+            examples: [">translate [langue d'origine] [langue voulue] <text>"]
         });
     }
 

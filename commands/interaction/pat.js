@@ -8,7 +8,8 @@ module.exports = class Patcommand extends Command {
             name: 'pat',
             group: 'interaction',
             memberName: 'pat',    
-            description: 'fait un tape a un joueur '
+            description: 'La commande pat petmet de faire une tape a un utilisateur mentionner',
+            examples: ["pat <mention>"]
         });
     }
 

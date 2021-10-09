@@ -7,7 +7,8 @@ module.exports = class stopbot extends Command {
             name: 'stopbot',
             group: 'moderation',
             memberName: 'stopbot',
-            description: 'stop le bot'
+            description: "La commande stopbot permet d'arreter le bot (Il faut ètre propriétaire du bot pour utiliser cette commande)",
+            examples: ["stopbot"]
         });
     }
  
@@ -25,7 +26,7 @@ module.exports = class stopbot extends Command {
             this.client.user.setPresence({ status: 'idle' });
             setTimeout(() => {
                 this.client.destroy()
-                console.log('\nAMATERASU A ÉTÉ ARRETER !!!!!!!!!!!')
+                console.log(`\n${botname} A ÉTÉ ARRETER !!!!!!!!!!!`)
             }, 5000);
         } else {
             message.say(`:x: Seul <@505762041789808641> le developeur du bot peut executer cette commande`)

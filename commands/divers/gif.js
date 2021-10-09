@@ -12,7 +12,8 @@ module.exports = class GifCommand extends Command {
             name: 'gif',
             group: 'divers',
             memberName: 'gif',
-            description: 'permet de aficher un gif'
+            description: "La commande gif permet d'afficher un gif en relation avec l'argument de la commande",
+            examples: ["gif <text>"]
         });
     }
 

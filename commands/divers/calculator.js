@@ -7,7 +7,8 @@ module.exports = class CalculatorName extends Command {
             name: 'calculator',
             group: 'divers',
             memberName: 'calculator',
-            description: 'weky calculator'
+            description: 'La commande calculator permet de faire apparaitre une calculatrice fonctionnel',
+            examples: ["calculator"]
         });
     }
  

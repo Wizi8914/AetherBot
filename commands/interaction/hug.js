@@ -8,7 +8,8 @@ module.exports = class Hugcommand extends Command {
             name: 'hug',
             group: 'interaction',
             memberName: 'hug',    
-            description: 'fait un calin a un joueur '
+            description: 'La commande hug permet de faire un calin a un utilisateur mentionner',
+            examples: ["hug <mention>"]
         });
     }
 

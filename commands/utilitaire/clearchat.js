@@ -9,7 +9,8 @@ module.exports = class ClearchatCommand extends Command {
             aliases: ['cc'],
             group: 'utilitaire',
             memberName: 'clearchat',
-            description: 'clearchat',
+            description: 'La commande clearchat permet de supprimer un certain nombre de message (Il faut ètre administrateur pour utiliser cette commande)',
+            examples: ["clearchat [nombre]"]
         })
     }
 

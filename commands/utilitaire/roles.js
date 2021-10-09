@@ -9,7 +9,8 @@ module.exports = class RoolesCommand extends Command {
             name: 'roles',
             group: 'utilitaire',
             memberName: 'icon',
-            description: 'icon du serveur'
+            description: 'La commande roles permet de voir la liste des roles du server sur lequelle vous vous trouver (Il faut ètre administrateur pour utiliser cette commande)',
+            examples: ["roles"]
         });
     }
 

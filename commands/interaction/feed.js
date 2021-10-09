@@ -8,7 +8,8 @@ module.exports = class Feedcommand extends Command {
             name: 'feed',
             group: 'interaction',
             memberName: 'feed',    
-            description: 'nouri un joueur'
+            description: 'La commande feed permet de nourrir un utilisateur mentionner',
+            examples: ["feed <mention>"]
         });
     }
 

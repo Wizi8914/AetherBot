@@ -10,7 +10,8 @@ module.exports = class ClearCommand extends Command {
             aliases: ['clearqueue', 'clearlist'],
             group: 'music',
             memberName: 'clear',
-            description: 'permet de aficher le vote'
+            description: "La commande clear permet de suprimer l'intégraliter de la queue sauf la musique actuellement en train d'ètre jouer",
+            examples: ["clear"]
         });
     }
 

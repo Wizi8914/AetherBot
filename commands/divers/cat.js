@@ -9,7 +9,8 @@ module.exports = class catCommand extends Command {
             name: 'cat',
             group: 'divers',
             memberName: 'cat',
-            description: 'giv cat image'
+            description: 'La commande cat donne une image aléatoire de chat',
+            examples: ["cat"]
         });
     }
  
@@ -19,7 +20,7 @@ module.exports = class catCommand extends Command {
 
         const embed = new MessageEmbed()
             .setColor('RANDOM')
-            .setTitle('Image aleatoire de chat')
+            .setTitle('Image aléatoire de chat')
             .setURL(responce[0].url)
             .setImage(responce[0].url)
             .setDescription("Si L'`image` ne charge pas clicker sur le **titre**")

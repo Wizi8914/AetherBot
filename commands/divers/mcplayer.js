@@ -9,7 +9,8 @@ module.exports = class McCommand extends Command {
             name: 'mcplayer',
             group: 'divers',
             memberName: 'mcplayer',
-            description: 'afficher un joueur'
+            description: "La commande mcplayer donne des information d'un compte minecraft a partire de son pseudo",
+            examples: ["mcplayer"]
         });
     }
 
