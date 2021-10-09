@@ -1,7 +1,7 @@
 const { Command, CommandoMessage } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
 const { Commanddontexist } = require('../../strings.json');
-const { botimage, botname} = require('../../config.js');
+const { botimage, botname } = require('../../config.js');
 
 const emojilist = [
     ":notes:",
