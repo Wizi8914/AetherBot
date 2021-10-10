@@ -33,7 +33,7 @@ module.exports = class HelpCommand extends Command {
             const embed = new MessageEmbed()
                 .setColor('BLUE')
                 .setTitle("Liste des commandes de " + botname)
-                .setDescription(`Le prefix pour utiliser le ${botname} est ${message.guild.commandPrefix}\n` + "Information sur une commande" + "`>help <commande>`");
+                .setDescription(`Le prefix pour utiliser ${botname} est: ` + "`" + `${message.guild.commandPrefix}` + "`" + `\n` + "Information sur une commande: " + "`" + `${message.guild.commandPrefix}help <commande>` + "`");
 
                 let command = [];
                 for (let i = 2; i < this.client.registry.groups.size; i++) {
