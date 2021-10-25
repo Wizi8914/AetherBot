@@ -3,9 +3,8 @@ const path = require('path');
 const Canvas = require('canvas');
 const { Discord } = require('discord.js'); 
 const { welcomesentence } = require('./strings.json');
-const jsoning = require('jsoning');
-const db = new jsoning('database.json');
-const { badwords, botname } = require('./config');
+const { badwords } = require('./config');
+const mongoose = require('mongoose');
 
 require('dotenv').config()
 
@@ -22,7 +21,14 @@ require('discord-buttons')(client)
 
 //----------------- DATABASE ---------------------
 
-module.exports = db;
+mongoose.connect(process.env.MONGODB_SERVER, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log(`Connecter a la database ${mongoose.connection.name} - (${mongoose.version})`);
+}).catch((err) => {
+    console.log(err)
+});
 
 
 //--------------------- LAVALINK ------------------------
@@ -121,9 +127,13 @@ client.on('guildMemberAdd', async (member) => {
 //----------------------Role------------------------
 
 client.on('guildMemberAdd', (member) => {
-	let membrerole = member.guild.roles.cache.find(role => role.name === 'Membre');
+	let membrerole = member.guild.roles.cache.find(role => role.name === '❌ • Non vérifié');
 
 	member.roles.add(membrerole);
+
+	let membrerole1 = member.guild.roles.cache.find(role => role.name === '👘 • Membre');
+
+	member.roles.add(membrerole1);
 })
 
 
@@ -131,6 +141,9 @@ client.on('guildMemberAdd', (member) => {
 
 client.on('message', (message) => {
     if(!message.channel.nsfw) {
+        if(message.content === '>hentai') {
+            return;
+        }
         if(badwords.some(word => message.content.toLocaleLowerCase().split(/ +/).includes(word) )){
             message.delete()
             message.say(':x: **Vous ne pouvez utiliser ces mots seulement dans un salon NSFW !**').then(async(resultmessage) => {
@@ -152,7 +165,9 @@ client.registry
 	.registerGroup('divers')
 	.registerGroup('utilitaire')
 	.registerGroup('moderation')
+    .registerGroup('nsfw')
     .registerGroup('interaction')
+    .registerGroup('anime')
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.server = {
@@ -169,10 +184,7 @@ client.once('disconnect', () => {
 
 client.once('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag} - (${client.user.id})`);
-    setTimeout(() => {
-        client.user.setActivity(`⚙️ ${botname} est actuellement en maintenance`, { type: 'PLAYING' });
-    }, 1000);
-    //client.user.setPresence({ status: "idle" });
+    client.user.setActivity('⚙️ Amaterasu est actuellement en maintenance', { type: 'PLAYING' });
     client.manager.init(client.user.id)
 }); 
 
