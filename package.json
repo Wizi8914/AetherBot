@@ -39,6 +39,7 @@
     "mongoose": "^6.0.12",
     "node-fetch": "^2.6.1",
     "node-osu": "^2.2.1",
+    "number-compressor": "^1.0.2",
     "open-graph": "^0.2.1",
     "pretty-ms": "^7.0.1",
     "spdl-core": "^2.0.2",

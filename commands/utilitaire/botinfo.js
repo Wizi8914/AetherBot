@@ -68,7 +68,7 @@ module.exports = class BotInfoCommand extends Command {
             .addField('Statistique machine:', [
                 `:chart_with_downwards_trend: **Total De Memoir utiliser :** ${(process.memoryUsage().heapTotal / 1024 / 1024).toFixed(2)} MB`,
                 `:bar_chart: **Memoire Utiliser :** ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`,
-                `:chart_with_upwards_trend: **Pourcentage du CPU :** ${percent}%`,
+                `:chart_with_upwards_trend: **Pourcentage du CPU :** ${Math.round(percent)}%`,
                 `:arrows_counterclockwise: **Dernier restart :** ${prettyMilliseconds(process.uptime().toFixed(2) * 1000)}`
             ].join("\n"))
             .addField("Liens:", [
