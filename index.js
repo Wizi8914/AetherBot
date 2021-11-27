@@ -4,7 +4,6 @@ const Canvas = require('canvas');
 const { Discord } = require('discord.js'); 
 const { welcomesentence } = require('./strings.json');
 const { badwords } = require('./config');
-const mongoose = require('mongoose');
 
 require('dotenv').config()
 
@@ -20,6 +19,8 @@ const client = new CommandoClient({
 require('discord-buttons')(client)
 
 //----------------- DATABASE ---------------------
+const mongoose = require('mongoose');
+const MemberProvider = require('./models/Provider');
 
 mongoose.connect(process.env.MONGODB_SERVER, {
     useNewUrlParser: true,
@@ -29,7 +30,6 @@ mongoose.connect(process.env.MONGODB_SERVER, {
 }).catch((err) => {
     console.log(err)
 });
-
 
 //--------------------- LAVALINK ------------------------
 
@@ -178,13 +178,15 @@ client.server = {
 	playlist: null
 };
 
+
+
 client.once('disconnect', () => {
     console.log('deconnecter');
 });
 
 client.once('ready', () => {
     console.log(`Connecté en tant que ${client.user.tag} - (${client.user.id})`);
-    client.user.setActivity('⚙️ Amaterasu est actuellement en maintenance', { type: 'PLAYING' });
+    client.user.setActivity('⚙️ Aetherbot est actuellement en maintenance', { type: 'PLAYING' });
     client.manager.init(client.user.id)
 }); 
 

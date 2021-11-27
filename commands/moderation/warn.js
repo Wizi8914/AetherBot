@@ -1,6 +1,6 @@
 const { Command, CommandoMessage } = require('discord.js-commando');
-const jsoning = require('jsoning');
-const db = new jsoning('warndb.json');
+const { getMember } = require('../../models/Provider.js')
+const { Member } = require('../../models/models.js')
 
 
 module.exports = class WarnCommand extends Command {
@@ -40,20 +40,12 @@ module.exports = class WarnCommand extends Command {
             return message.say(":x: **Il faut entrer un nom d'utilisateur valide !**")
         }
 
-        message.say(member.id)
+        const userDB = await getMember(member)
 
-        if(await db.get(member.id) == false) {
-            db.set(member.id, 1)
-        }
+        if (userDB) return message.channel.send(`> **${member.username}** est déjà inscrit dans la Base de Données.`);
+        await Member.create({ pseudo: member.username, id: member.id});
 
-        console.log(db.get(member.id))
-
-        db.math(member.id, "add", 1)
-
-        if(db.get(member.id) == 1) {
-            message.say('test')
-            db.math(member.id, "add", 1)
-        }
+        message.channel.send(`> **${member.username}** à bien été ajouté`);
     }
 }
 
